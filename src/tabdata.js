@@ -1,6 +1,6 @@
 import React from 'react';
 
-const tab = [
+const tabData = [
     {
         category: 'Favorite Reads',
         subcategory: 'Farm Life',

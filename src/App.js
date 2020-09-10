@@ -1,12 +1,14 @@
 import React from 'react';
-import Tabs from './components/Tabs';
+import TabsApp from './components/Tabs';
+import { TabPanel } from 'react-tabs';
+import tabData from './tabdata';
 
 
 function App() {
   return (
     <div className="App">
-    
-      <Tabs />
+
+     <TabsApp/>
 
     </div>
   );
