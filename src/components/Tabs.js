@@ -1,32 +1,90 @@
 import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import 'react-tabs/style/react-tabs.css';
-import tabData from '../tabdata';
+import categories from '../tabdata'
 
 
-export default function TabsApp() {
+const OptionsList = ({ options, selectedOptions, onChange }) => {
 
-    return(
+    const handleCheckboxClicked = (selectedOptionId) => {
+      // is currently selected
+      if(selectedCategories[selectedOptionId]){
+        // remove selected key from options list
+        delete selectedCategories[selectedOptionId];
+      } else { // is not currently selected
+        // Add selected key to optionsList
+        selectedCategories[selectedOptionId] = {}
+      }
+      // call onChange function given by parent
+      onChange(selectedCategories)
+    }
+
+    const handleSubOptionsListChange = (optionId, subSelections) => {
+      // add sub selections to current optionId
+      selectedCategories[optionId] = subSelections;
+      // call onChange function given by parent
+      onChange(selectedCategories);
+    }
+
+export default () => (
+
   <Tabs>
-    <TabList>
-      <Tab>Tab 1</Tab>
-      <Tab>Tab 2</Tab>
+  {categories.map((category) => (
+    <>
+    <TabList key={category.title}>
+        <Tab>{category.title}</Tab>
+        <Tab>{category.title}</Tab>
     </TabList>
-   {tabData.map((tab) => (
-
-    <TabPanel key={tab.title}>
-        {tab.title}
+     <TabList key={category.subcategories}>
+        <Tab>{subcategories.title}</Tab>
+        <Tab>{category.subcategories.title}</Tab>
+    </TabList>
+    <TabPanel key={category.subcategories}>
+        <a href="#">{category.subcategories.pages.title}</a>
+        <a href="#">{category.subcategories.pages.title}</a>
     </TabPanel>
-
+    </>
     ))}
-{/*
-    {archives.map((archive) => (
-        <Link display="block" variant="body1" href={archive.url} key={archive.title}>
-
-          {archive.title}
-        </Link> */}
-
-
   </Tabs>
-    )
-}
+
+);
+
+
+
+// // Recursive component
+
+
+//     return (
+//       <div>
+//         {options.map(option => (
+//           <ul>
+//             <Checkbox
+//               selected={selectedOptions[option.id]}
+//               label={option.name}
+//               onChange={() => {handleCheckboxClicked(option.id)}}
+//              />
+//             {/* Base Case */}
+//             {(option.subOptions.length > 0 && selectedOptions[option.id]) &&
+//               <OptionsList
+//                 options={option.subOptions}
+//                 selectedOptions={selectedOptions[option.id]}
+//                 onChange={(subSelections) => handleSubOptionsListChange(option.id, subSelections)}
+//                />
+//             }
+//           </ul>
+//         ))}
+//       </div>
+//     )
+//   }
+
+//   // Dumb checkbox component, completly controlled by parent
+//   const Checkbox = ({ selected, label, onChange }) => {
+//     return (
+//       <div>
+//         <div
+//           className="checkbox"
+//           onClick={() => onChange(!selected)}
+//         />
+//         <div className="label">{label}</div>
+//       </div>
+//     )
+//   }
