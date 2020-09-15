@@ -262,7 +262,7 @@ const categories = [
                                      subcategories: [
                                     {
                                         subject: 'Farm Equipment',
-                                        id: 'farmEquipment-id',
+                                        id: 'comments-id',
                                         post: [{ title: 'Lawn Care Equipment'}],
                                     },
                                 ],
